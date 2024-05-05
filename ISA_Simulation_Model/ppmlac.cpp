@@ -5,16 +5,7 @@
 #include "master.hpp"
 
 using namespace std;
-int seed = 33;
 
-void printfun(){
-    // cout << "Alice:temp_reg[0] = " << alice.temp_reg[0] << "|" << "temp_reg[1] = " << alice.temp_reg[1] << "|" << "temp_reg[2] = " << alice.temp_reg[2] << "|" << "temp_reg[3] = " << alice.temp_reg[3] << endl;
-    // cout << "Alice:mem[0] = " << alice.mem[0] << "|" << "mem[1] = " << alice.mem[1] << "|" << "mem[2] = " << alice.mem[2] << "|" << "mem[3] = " << alice.mem[3] << "|" << "mem[4] = " << alice.mem[4] << "|" << "mem[5] = " << alice.mem[5] << "|" << "mem[6] = " << alice.mem[6] << "|" << "mem[7] = " << alice.mem[7] << "|" << "mem[8] = " << alice.mem[8] << "|" << "mem[9] = " << alice.mem[9] << endl;
-    // cout << "Bob:temp_reg[0] = " << bob.temp_reg[0] << "|" << "temp_reg[1] = " << bob.temp_reg[1] << "|" << "temp_reg[2] = " << bob.temp_reg[2] << "|" << "temp_reg[3] = " << bob.temp_reg[3] << endl;
-    // cout << "Bob:mem[0] = " << bob.mem[0] << "|" << "mem[1] = " << bob.mem[1] << "|" << "mem[2] = " << bob.mem[2] << "|" << "mem[3] = " << bob.mem[3] << "|" << "mem[4] = " << bob.mem[4] << "|" << "mem[5] = " << bob.mem[5] << "|" << "mem[6] = " << bob.mem[6] << "|" << "mem[7] = " << bob.mem[7] << "|" << "mem[8] = " << bob.mem[8] << "|" << "mem[9] = " << bob.mem[9] << endl;
-    // cout << "Bob:arch_reg[0] = " << bob.arch_reg[0] << "|" << "arch_reg[1] = " << bob.arch_reg[1] << "|" << "arch_reg[2] = " << bob.arch_reg[2] << endl;
-
-}
 
 int main(){
     master alice;
@@ -43,13 +34,16 @@ int main(){
 
     alice.readtemp(0,0);
     alice.RSA_decrypt(0,1);
-    alice.intialize_seed(1);
 
     //Intial Conditions
+    int bob_number;
     alice.mem[0] = 3;
-    alice.mem[1] = 6;
     bob.mem[0] = 3;
-    bob.mem[1] = 2;
+    alice.mem[1] = 6;
+    cout << "Enter the number you want to multiply with Alice's number secretly (You are Bob): ";
+    cin >> bob_number;
+    alice.mem[1] = rand() % bob_number;
+    bob.mem[1] = bob_number - alice.mem[1];
     
     //Multiplication
     //Protocol 1
